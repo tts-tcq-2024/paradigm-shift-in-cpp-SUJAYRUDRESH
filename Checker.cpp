@@ -54,14 +54,22 @@ bool BatteryManagementSystem::batteryIsOk(float temperature, float soc, float ch
 
 void testIsTemperatureInRange() {
     BatteryManagementSystem bms;
+    assert(bms.isTemperatureInRange(0) == true);
+    assert(bms.isTemperatureInRange(45) == true);
     assert(bms.isTemperatureInRange(25) == true);
+    assert(bms.isTemperatureInRange(-0.1) == false);
+    assert(bms.isTemperatureInRange(45.1) == false);
     assert(bms.isTemperatureInRange(-5) == false);
     assert(bms.isTemperatureInRange(50) == false);
 }
 
 void testIsSocInRange() {
     BatteryManagementSystem bms;
+    assert(bms.isSocInRange(20) == true);
+    assert(bms.isSocInRange(80) == true);
     assert(bms.isSocInRange(50) == true);
+    assert(bms.isSocInRange(19.9) == false);
+    assert(bms.isSocInRange(80.1) == false);
     assert(bms.isSocInRange(10) == false);
     assert(bms.isSocInRange(90) == false);
 }
@@ -69,12 +77,22 @@ void testIsSocInRange() {
 void testIsChargeRateInRange() {
     BatteryManagementSystem bms;
     assert(bms.isChargeRateInRange(0.7) == true);
+    assert(bms.isChargeRateInRange(0.8) == true);
+    assert(bms.isChargeRateInRange(0) == true);
+    assert(bms.isChargeRateInRange(0.7) == true);
+    assert(bms.isChargeRateInRange(0.81) == false);
     assert(bms.isChargeRateInRange(0.9) == false);
 }
 
 void testBatteryIsOk() {
     BatteryManagementSystem bms;
     assert(bms.batteryIsOk(25, 70, 0.7) == true);
+    assert(bms.batteryIsOk(25, 70, 0.7) == true);
+    assert(bms.batteryIsOk(0, 20, 0) == true);
+    assert(bms.batteryIsOk(45, 80, 0.8) == true);
+    assert(bms.batteryIsOk(-1, 70, 0.7) == false);
+    assert(bms.batteryIsOk(25, 19, 0.7) == false);
+    assert(bms.batteryIsOk(25, 70, 0.9) == false);
     assert(bms.batteryIsOk(50, 85, 0) == false);
 }
 
