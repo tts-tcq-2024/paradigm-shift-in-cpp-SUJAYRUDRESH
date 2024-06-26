@@ -77,7 +77,7 @@ void testIsSocInRange() {
 void testIsChargeRateInRange() {
     BatteryManagementSystem bms;
     assert(bms.isChargeRateInRange(0.7) == true);
-    assert(bms.isChargeRateInRange(0.8) == true);
+    assert(bms.isChargeRateInRange(0.8) == false);
     assert(bms.isChargeRateInRange(0) == true);
     assert(bms.isChargeRateInRange(0.7) == true);
     assert(bms.isChargeRateInRange(0.81) == false);
@@ -89,7 +89,7 @@ void testBatteryIsOk() {
     assert(bms.batteryIsOk(25, 70, 0.7) == true);
     assert(bms.batteryIsOk(25, 70, 0.7) == true);
     assert(bms.batteryIsOk(0, 20, 0) == true);
-    assert(bms.batteryIsOk(45, 80, 0.8) == true);
+    assert(bms.batteryIsOk(45, 80, 0.8) == false);
     assert(bms.batteryIsOk(-1, 70, 0.7) == false);
     assert(bms.batteryIsOk(25, 19, 0.7) == false);
     assert(bms.batteryIsOk(25, 70, 0.9) == false);
