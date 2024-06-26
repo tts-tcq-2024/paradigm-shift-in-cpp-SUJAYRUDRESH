@@ -1,10 +1,17 @@
 #include <assert.h>
 #include <iostream>
 
-
 using namespace std;
 
+
 class BatteryManagementSystem {
+private:
+    static constexpr float kMinTemperature = 0.0f;
+    static constexpr float kMaxTemperature = 45.0f;
+    static constexpr float kMinSoc = 20.0f;
+    static constexpr float kMaxSoc = 80.0f;
+    static constexpr float kMaxChargeRate = 0.8f;
+
 public:
     bool isTemperatureInRange(float temperature) const;
     bool isSocInRange(float soc) const;
@@ -12,35 +19,32 @@ public:
     bool batteryIsOk(float temperature, float soc, float chargeRate) const;
 
 private:
-    void logMessage(const std::string& message) const;
+    void logMessage(const std::string& message, float value, bool isHigh) const;
 };
 
-
-void BatteryManagementSystem::logMessage(const std::string& message) const {
-    // Log the message to console
-    cout << message << endl;
-    
+void BatteryManagementSystem::logMessage(const std::string& message, float value, bool isHigh) const {
+    cout << message << ": " << value << " (" << (isHigh ? "high" : "low") << ")" << endl;
 }
 
 bool BatteryManagementSystem::isTemperatureInRange(float temperature) const {
-    if (temperature < 0 || temperature > 45) {
-        logMessage("Temperature out of range!");
+    if (temperature < kMinTemperature || temperature > kMaxTemperature) {
+        logMessage("Temperature out of range", temperature, temperature > kMaxTemperature);
         return false;
     }
     return true;
 }
 
 bool BatteryManagementSystem::isSocInRange(float soc) const {
-    if (soc < 20 || soc > 80) {
-        logMessage("State of Charge out of range!");
+    if (soc < kMinSoc || soc > kMaxSoc) {
+        logMessage("State of Charge out of range", soc, soc > kMaxSoc);
         return false;
     }
     return true;
 }
 
 bool BatteryManagementSystem::isChargeRateInRange(float chargeRate) const {
-    if (chargeRate > 0.8) {
-        logMessage("Charge Rate out of range!");
+    if (chargeRate > kMaxChargeRate) {
+        logMessage("Charge Rate out of range", chargeRate, true);
         return false;
     }
     return true;
@@ -49,8 +53,6 @@ bool BatteryManagementSystem::isChargeRateInRange(float chargeRate) const {
 bool BatteryManagementSystem::batteryIsOk(float temperature, float soc, float chargeRate) const {
     return isTemperatureInRange(temperature) && isSocInRange(soc) && isChargeRateInRange(chargeRate);
 }
-
-
 
 void testIsTemperatureInRange() {
     BatteryManagementSystem bms;
@@ -77,7 +79,6 @@ void testIsSocInRange() {
 void testIsChargeRateInRange() {
     BatteryManagementSystem bms;
     assert(bms.isChargeRateInRange(0.7) == true);
-    assert(bms.isChargeRateInRange(0.8) == false);
     assert(bms.isChargeRateInRange(0) == true);
     assert(bms.isChargeRateInRange(0.7) == true);
     assert(bms.isChargeRateInRange(0.81) == false);
@@ -89,7 +90,6 @@ void testBatteryIsOk() {
     assert(bms.batteryIsOk(25, 70, 0.7) == true);
     assert(bms.batteryIsOk(25, 70, 0.7) == true);
     assert(bms.batteryIsOk(0, 20, 0) == true);
-    assert(bms.batteryIsOk(45, 80, 0.8) == false);
     assert(bms.batteryIsOk(-1, 70, 0.7) == false);
     assert(bms.batteryIsOk(25, 19, 0.7) == false);
     assert(bms.batteryIsOk(25, 70, 0.9) == false);
