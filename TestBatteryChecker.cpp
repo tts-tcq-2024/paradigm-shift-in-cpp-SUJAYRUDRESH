@@ -1,7 +1,9 @@
 #include "TestBatteryChecker.h"
+#include "LanguageManager.h"   // Ensure this includes the LanguageManager class
+#include "StatusManager.h"     // Ensure this includes the StatusManager class
+#include "BatteryChecker.h"    // Ensure this includes the BatteryChecker class
 
 void testStatusManager() {
-    LanguageManager languageManager;
     StatusManager statusManager;
 
     // Initialize status manager with statuses and messages
