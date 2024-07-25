@@ -1,4 +1,4 @@
-Status.h: Defines the Status class.
+Status.h: Defines the Status class.\n
 Parameter.h: Enum for different parameters (SOC, Temperature, Charge Rate).
 Language.h: Enum for languages (English, German).
 StatusManager.h: Manages status and associated messages.
