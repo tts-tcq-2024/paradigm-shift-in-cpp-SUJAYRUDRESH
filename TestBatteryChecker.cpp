@@ -1,7 +1,7 @@
 #include "TestBatteryChecker.h"
-#include "LanguageManager.h"   // Ensure this includes the LanguageManager class
-#include "StatusManager.h"     // Ensure this includes the StatusManager class
-#include "BatteryChecker.h"    // Ensure this includes the BatteryChecker class
+#include "LanguageManager.h"  
+#include "StatusManager.h" 
+#include "BatteryChecker.h"  
 
 void testStatusManager() {
     StatusManager statusManager;
@@ -60,5 +60,4 @@ void testBatteryChecker() {
     // Test case where SOC is NORMAL and temperature is NORMAL
     batteryChecker.checkBatteryStatus(35, 25, 0.5);  // Expect NORMAL message
 
-    std::cout << "BatteryChecker tests passed!" << std::endl;
 }
