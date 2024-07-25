@@ -2,6 +2,7 @@
 #include "LanguageManager.h"
 #include "StatusManager.h"
 #include "BatteryChecker.h"
+#include "TestBatteryChecker.h"
 
 int main() {
     LanguageManager languageManager;
@@ -68,6 +69,8 @@ int main() {
     statusManager.setOverallStatusMessage(Language::GERMAN, "Gesamtbatteriestatus: ");
 
     BatteryChecker batteryChecker(languageManager, statusManager);
+    testStatusManager();
+    testBatteryChecker();
 /**
     languageManager.setLanguage(Language::ENGLISH);
     batteryChecker.checkBatteryStatus(25, 70, 0.75);
