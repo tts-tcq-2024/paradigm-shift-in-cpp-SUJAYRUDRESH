@@ -17,6 +17,7 @@ private:
 
     Status mapToStatus(float value, const std::vector<Status>& statuses) const;
     Status getOverallStatus(Status temperatureStatus, Status socStatus, Status chargeRateStatus) const;
+    bool isValueInRange(float value, const Status& status) const;
     void outputMessage(const Status& status) const;
 };
 
