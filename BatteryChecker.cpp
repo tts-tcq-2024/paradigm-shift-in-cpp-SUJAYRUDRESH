@@ -3,11 +3,15 @@
 
 Status BatteryChecker::mapToStatus(float value, const std::vector<Status>& statuses) const {
     for (const auto& status : statuses) {
-        if (value >= status.getMin() && value <= status.getMax()) {
+        if (isValueInRange(value, status)) {
             return status;
         }
     }
     return Status(Parameter::SOC, "NORMAL", 0, 0);  // Default to NORMAL if no range matched
+}
+
+bool BatteryChecker::isValueInRange(float value, const Status& status) const {
+    return value >= status.getMin() && value <= status.getMax();
 }
 
 Status BatteryChecker::getOverallStatus(Status temperatureStatus, Status socStatus, Status chargeRateStatus) const {
