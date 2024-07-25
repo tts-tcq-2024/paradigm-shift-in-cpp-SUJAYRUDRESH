@@ -1,4 +1,6 @@
 #include "StatusManager.h"
+#include <stdexcept>
+#include <iostream>
 
 void StatusManager::addStatusAndMessage(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages) {
     Status newStatus(parameter, name, min, max);
