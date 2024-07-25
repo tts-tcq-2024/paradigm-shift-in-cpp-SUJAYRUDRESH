@@ -17,7 +17,12 @@ std::vector<Status> StatusManager::getStatuses(Parameter parameter) const {
 }
 
 std::string StatusManager::getMessage(const Status& status, Language language) const {
-    return messageMap.at(status).at(language);
+    try {
+        return messageMap.at(status).at(language);
+    } catch (const std::out_of_range& e) {
+        std::cerr << "Error: " << e.what() << " - Status or language not found" << std::endl;
+        return "Message not found";
+    }
 }
 
 void StatusManager::setOverallStatusMessage(Language language, const std::string& message) {
