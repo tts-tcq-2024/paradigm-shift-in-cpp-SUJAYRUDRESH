@@ -3,7 +3,6 @@
 
 #include <string>
 #include "Parameter.h"
-#include "Language.h"
 
 class Status {
 public:
@@ -17,6 +16,10 @@ public:
 
     bool operator<(const Status& other) const {
         return std::tie(parameter, name, min, max) < std::tie(other.parameter, other.name, other.min, other.max);
+    }
+
+    bool operator==(const Status& other) const {
+        return std::tie(parameter, name, min, max) == std::tie(other.parameter, other.name, other.min, other.max);
     }
 
 private:
