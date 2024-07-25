@@ -70,14 +70,14 @@ int main() {
 
     BatteryChecker batteryChecker(languageManager, statusManager);
 
-    testStatusManager();
-    testBatteryChecker();
-/**
     languageManager.setLanguage(Language::ENGLISH);
     batteryChecker.checkBatteryStatus(25, 70, 0.75);
 
     languageManager.setLanguage(Language::GERMAN);
     batteryChecker.checkBatteryStatus(50, 85, 0.9);
-**/
+
+    testStatusManager();
+    testBatteryChecker();
+
     return 0;
 }
