@@ -16,12 +16,19 @@ bool BatteryChecker::isValueInRange(float value, const Status& status) const {
 
 Status BatteryChecker::getOverallStatus(Status temperatureStatus, Status socStatus, Status chargeRateStatus) const {
     // Logic to determine overall status; for simplicity, we assume any breach results in a critical status.
+    bool hasHighStatus = temperatureStatus.getName() == "HIGH_TEMP_BREACH" ;
+    hasHighStatus = socStatus.getName() == "HIGH_SOC_BREACH" ;
+    hasHighStatus = chargeRateStatus.getName() == "HIGH_CHARGE_RATE_BREACH" ;
+
+    return hasHighStatus ? Status(Parameter::SOC, "HIGH", 0, 0) : Status(Parameter::SOC, "NORMAL", 0, 0);
+/**
     if (temperatureStatus.getName() == "HIGH_TEMP_BREACH" ||
         socStatus.getName() == "HIGH_SOC_BREACH" ||
         chargeRateStatus.getName() == "HIGH_CHARGE_RATE_BREACH") {
         return Status(Parameter::SOC, "HIGH_TEMP_BREACH", 0, 0);  // Example: Replace with appropriate status if needed
     }
     return Status(Parameter::SOC, "NORMAL", 0, 0);
+**/
 }
 
 void BatteryChecker::outputMessage(const Status& status) const {
