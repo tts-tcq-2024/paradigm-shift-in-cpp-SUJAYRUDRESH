@@ -18,7 +18,7 @@ Status BatteryChecker::getOverallStatus(Status temperatureStatus, Status socStat
     // Logic to determine overall status; for simplicity, we assume any breach results in a critical status.
     //bool hasHighStatus = temperatureStatus.getName() == "HIGH_TEMP_BREACH" || socStatus.getName() == "HIGH_SOC_BREACH" || socStatus.getName() == "HIGH_SOC_BREACH" ;
     bool highStatus = hasHighStatus(temperatureStatus, socStatus, chargeRateStatus);
-    return hasHighStatus ? Status(Parameter::SOC, "HIGH", 0, 0) : Status(Parameter::SOC, "NORMAL", 0, 0);
+    return highStatus ? Status(Parameter::SOC, "HIGH", 0, 0) : Status(Parameter::SOC, "NORMAL", 0, 0);
 }
 
 bool BatteryChecker::hasHighStatus(const Status& temperatureStatus, const Status& socStatus, const Status& chargeRateStatus) const {
