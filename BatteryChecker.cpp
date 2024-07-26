@@ -27,10 +27,6 @@ bool BatteryChecker::hasHighStatus(const Status& temperatureStatus, const Status
            chargeRateStatus.getName() == "HIGH_CHARGE_RATE_BREACH";
 }
 
-bool BatteryChecker::isValueInRange(float value, const Status& status) const {
-    return value >= status.getMin() && value <= status.getMax();
-}
-
 void BatteryChecker::outputMessage(const Status& status) const {
     std::string message = statusManager.getMessage(status, languageManager.getLanguage());
     std::cout << message << std::endl;
