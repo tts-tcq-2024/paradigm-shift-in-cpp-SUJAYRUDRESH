@@ -5,7 +5,7 @@
 #include "Parameter.h"
 #include "Language.h"
 
-class Status {
+class BatteryParameterInfo {
 public:
     Status(Parameter parameter, const std::string& name, float min, float max)
         : parameter(parameter), name(name), min(min), max(max) {}
