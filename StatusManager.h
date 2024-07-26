@@ -10,13 +10,13 @@
 
 class StatusManager {
 public:
-    void addStatusAndMessage(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages);
+    void addPararemeter(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages);
     std::vector<Status> getStatuses(Parameter parameter) const;
     std::string getMessage(const Status& status, Language language) const;
     void setOverallStatusMessage(Language language, const std::string& message);
 
 private:
-    std::vector<Status> statuses;
+    std::vector<BatteryParameterInfo> parameters;
     std::map<Status, std::map<Language, std::string>> messageMap;
     std::map<Language, std::string> overallStatusMessages;
 };
