@@ -4,20 +4,20 @@
 #include <vector>
 #include <map>
 #include <string>
-//#include "Status.h"
+#include "BatteryParameterInfo.h"
 #include "Parameter.h"
 #include "Language.h"
 
 class StatusManager {
 public:
-    void addPararemeter(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages);
-    std::vector<Status> getStatuses(Parameter parameter) const;
-    std::string getMessage(const Status& status, Language language) const;
+    void addParameter(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages);
+    std::vector<BatteryParameterInfo> getStatuses(Parameter parameter) const;
+    std::string getMessage(const BatteryParameterInfo& status, Language language) const;
     void setOverallStatusMessage(Language language, const std::string& message);
 
 private:
     std::vector<BatteryParameterInfo> parameters;
-    std::map<Status, std::map<Language, std::string>> messageMap;
+    std::map<BatteryParameterInfo, std::map<Language, std::string>> messageMap;
     std::map<Language, std::string> overallStatusMessages;
 };
 
