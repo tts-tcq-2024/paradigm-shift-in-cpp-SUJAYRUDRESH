@@ -18,7 +18,7 @@ void testStatusManager() {
     auto socStatuses = statusManager.getStatuses(Parameter::SOC);
     assert(socStatuses.size() == 2); // We added 2 statuses
 
-    Status lowSocBreach(Parameter::SOC, "LOW_SOC_BREACH", 0, 20);
+    BatteryParameterInfo lowSocBreach(Parameter::SOC, "LOW_SOC_BREACH", 0, 20);
     assert(statusManager.getMessage(lowSocBreach, Language::ENGLISH) == "State of Charge too low!");
     assert(statusManager.getMessage(lowSocBreach, Language::GERMAN) == "Ladezustand zu niedrig!");
 
