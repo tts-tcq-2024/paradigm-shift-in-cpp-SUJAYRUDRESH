@@ -1,30 +1,30 @@
 #include "StatusManager.h"
-#include <stdexcept>
-#include <iostream>
 
-void StatusManager::addStatusAndMessage(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages) {
-    Status newStatus(parameter, name, min, max);
-    statuses.push_back(newStatus);
-    messageMap[newStatus] = messages;
+void StatusManager::addParameter(Parameter parameter, const std::string& name, float min, float max, const std::map<Language, std::string>& messages) {
+    BatteryParameterInfo parameterInfo(parameter, name, min, max);
+    parameters.push_back(parameterInfo);
+    messageMap[parameterInfo] = messages;
 }
 
 std::vector<Status> StatusManager::getStatuses(Parameter parameter) const {
-    std::vector<Status> parameterStatuses;
-    for (const auto& status : statuses) {
-        if (status.getParameter() == parameter) {
-            parameterStatuses.push_back(status);
+    std::vector<Status> statuses;
+    for (const auto& param : parameters) {
+        if (param.getParameter() == parameter) {
+            statuses.push_back(Status(param.getParameter(), param.getName(), param.getMin(), param.getMax()));
         }
     }
-    return parameterStatuses;
+    return statuses;
 }
 
 std::string StatusManager::getMessage(const Status& status, Language language) const {
-    try {
-        return messageMap.at(status).at(language);
-    } catch (const std::out_of_range& e) {
-        std::cerr << "Error: " << e.what() << " - Status or language not found" << std::endl;
-        return "Message not found";
+    auto it = messageMap.find(status);
+    if (it != messageMap.end()) {
+        auto langIt = it->second.find(language);
+        if (langIt != it->second.end()) {
+            return langIt->second;
+        }
     }
+    return "No message found!";
 }
 
 void StatusManager::setOverallStatusMessage(Language language, const std::string& message) {
