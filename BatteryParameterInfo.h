@@ -1,5 +1,5 @@
-#ifndef STATUS_H
-#define STATUS_H
+#ifndef BATTERYPARAMETERINFO_H
+#define BATTERYPARAMETERINFO_H
 
 #include <string>
 #include "Parameter.h"
