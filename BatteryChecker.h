@@ -3,11 +3,12 @@
 
 #include "LanguageManager.h"
 #include "StatusManager.h"
+#include "BatteryParameterInfo.h"
 
 class BatteryChecker {
 public:
-    BatteryChecker(LanguageManager& langMgr, StatusManager& statusMgr)
-        : languageManager(langMgr), statusManager(statusMgr) {}
+    BatteryChecker(LanguageManager& languageManager, StatusManager& statusManager)
+        : languageManager(languageManager), statusManager(statusManager) {}
 
     void checkBatteryStatus(float temperature, float soc, float chargeRate);
 
@@ -15,11 +16,11 @@ private:
     LanguageManager& languageManager;
     StatusManager& statusManager;
 
-    Status mapToStatus(float value, const std::vector<Status>& statuses) const;
-    Status getOverallStatus(Status temperatureStatus, Status socStatus, Status chargeRateStatus) const;
-    bool isValueInRange(float value, const Status& status) const;
-    bool hasHighStatus(const Status& temperatureStatus, const Status& socStatus, const Status& chargeRateStatus) const;
-    void outputMessage(const Status& status) const;
+    BatteryParameterInfo mapToStatus(float value, const std::vector<BatteryParameterInfo>& statuses) const;
+    bool isValueInRange(float value, const BatteryParameterInfo& status) const;
+    BatteryParameterInfo getOverallStatus(BatteryParameterInfo temperatureStatus, BatteryParameterInfo socStatus, BatteryParameterInfo chargeRateStatus) const;
+    bool hasHighStatus(const BatteryParameterInfo& temperatureStatus, const BatteryParameterInfo& socStatus, const BatteryParameterInfo& chargeRateStatus) const;
+    void outputMessage(const BatteryParameterInfo& status) const;
 };
 
 #endif // BATTERYCHECKER_H
