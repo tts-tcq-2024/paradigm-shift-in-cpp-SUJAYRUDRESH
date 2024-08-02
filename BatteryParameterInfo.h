@@ -7,7 +7,7 @@
 
 class BatteryParameterInfo {
 public:
-    Status(Parameter parameter, const std::string& name, float min, float max)
+    BatteryParameterInfo(Parameter parameter, const std::string& name, float min, float max)
         : parameter(parameter), name(name), min(min), max(max) {}
 
     Parameter getParameter() const { return parameter; }
@@ -15,11 +15,11 @@ public:
     float getMin() const { return min; }
     float getMax() const { return max; }
 
-    bool operator<(const Status& other) const {
+    bool operator<(const BatteryParameterInfo& other) const {
         return std::tie(parameter, name, min, max) < std::tie(other.parameter, other.name, other.min, other.max);
     }
 
-    bool operator==(const Status& other) const {
+    bool operator==(const BatteryParameterInfo& other) const {
         return std::tie(parameter, name, min, max) == std::tie(other.parameter, other.name, other.min, other.max);
     }
 
@@ -30,4 +30,4 @@ private:
     float max;
 };
 
-#endif // STATUS_H
+#endif // BATTERYPARAMETERINFO_H
