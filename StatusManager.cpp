@@ -6,17 +6,17 @@ void StatusManager::addParameter(Parameter parameter, const std::string& name, f
     messageMap[parameterInfo] = messages;
 }
 
-std::vector<Status> StatusManager::getStatuses(Parameter parameter) const {
-    std::vector<Status> statuses;
+std::vector<BatteryParameterInfo> StatusManager::getStatuses(Parameter parameter) const {
+    std::vector<BatteryParameterInfo> statuses;
     for (const auto& param : parameters) {
         if (param.getParameter() == parameter) {
-            statuses.push_back(Status(param.getParameter(), param.getName(), param.getMin(), param.getMax()));
+            statuses.push_back(param);
         }
     }
     return statuses;
 }
 
-std::string StatusManager::getMessage(const Status& status, Language language) const {
+std::string StatusManager::getMessage(const BatteryParameterInfo& status, Language language) const {
     auto it = messageMap.find(status);
     if (it != messageMap.end()) {
         auto langIt = it->second.find(language);
